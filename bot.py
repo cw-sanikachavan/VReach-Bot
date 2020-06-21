@@ -27,6 +27,7 @@ def start(bot, update):
         day = datetime.datetime.now(timezone('UTC')).astimezone(timezone('Asia/Kolkata')).day
         if os.path.exists('posters/'+str(day)+'.pdf'):
             bot.send_chat_action(chat_id=update["message"]["chat"]["id"], action=telegram.ChatAction.TYPING)
+            update.message.reply_text("Webinar poster scheduled for today.")
             bot.send_document(chat_id=update.message.chat.id, document=open('posters/'+str(day)+'.pdf',"rb"))
         else:
             if int(day) < 22 and int(datetime.datetime.now().month)==6:
@@ -37,7 +38,7 @@ def start(bot, update):
                 bot.send_chat_action(chat_id=update["message"]["chat"]["id"], action=telegram.ChatAction.TYPING)
                 update.message.reply_text("The Webinar series are over.")
                 return ConversationHandler.END
-        reply_keyboard = [['View webinar posters date wise'],['View webinar posters category wise'],['View webinar posters by viewing permissions']]
+        reply_keyboard = [['View webinar posters date wise'],['View webinar posters category wise'],['View webinar posters by viewing permissions'],['Thanks']]
         update.message.reply_text("Select an option",reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
         return SET_STAT
         
