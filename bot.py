@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 SET_STAT, BOOK, MENU, VIEW, CAT, DATE, DONE = range(7)
 LST_CHAT_ID = []
-
+TOKEN = "1047958577:AAFpUNLTsBvr9fi3-DQmZIElPVZcC895Ia0"
 def start(bot, update):
     try:
         print(datetime.date.today().day)
@@ -203,6 +203,9 @@ def main():
     # log all errors)
 
     # Start the Bot
+    updater.start_webhook(listen="0.0.0.0",port=int(PORT),url_path=TOKEN)
+    updater.bot.setWebhook('https://sheltered-shore-73299.herokuapp.com/ ' + TOKEN)
+
     updater.start_polling()
 
     # Run the bot until you press Ctrl-C or the process receives SIGINT,
