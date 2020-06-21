@@ -3,7 +3,7 @@ from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters, Rege
 import logging
 import telegramcalendar
 import telegram
-import pytz
+from pytz import timezone
 import os
 import time
 import datetime
