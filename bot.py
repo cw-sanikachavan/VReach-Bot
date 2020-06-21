@@ -3,10 +3,6 @@ from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters, Rege
 import logging
 import telegramcalendar
 import telegram
-import requests
-import pandas as pd
-import gspread
-import json
 import os
 import time
 import datetime
