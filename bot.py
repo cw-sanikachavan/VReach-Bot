@@ -16,12 +16,14 @@ logger = logging.getLogger(__name__)
 SET_STAT, BOOK, MENU, VIEW, CAT, DATE, DONE = range(7)
 LST_CHAT_ID = []
 TOKEN = "1047958577:AAFpUNLTsBvr9fi3-DQmZIElPVZcC895Ia0"
+t = "1115904035:AAG5x0dpPwmYNKRNBIHfjN7iADHTU4VN6UE"
+
 PORT = int(os.environ.get('PORT', 5000))
 
 def start(bot, update):
     try:
-        print(datetime.datetime.now().day)
-        day = datetime.datetime.now().day
+        print(update.message.date)
+        day = update.message.date
         if os.path.exists('posters/'+str(day)+'.pdf'):
             bot.send_chat_action(chat_id=update["message"]["chat"]["id"], action=telegram.ChatAction.TYPING)
             bot.send_document(chat_id=update.message.chat.id, document=open('posters/'+str(day)+'.pdf',"rb"))
