@@ -3,6 +3,7 @@ from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters, Rege
 import logging
 import telegramcalendar
 import telegram
+import pytz
 import os
 import time
 import datetime
@@ -22,8 +23,8 @@ PORT = int(os.environ.get('PORT', 5000))
 
 def start(bot, update):
     try:
-        print(update.message.date)
-        day = update.message.date
+        print(datetime.datetime.now(timezone('UTC')).astimezone(timezone('Asia/Kolkata')))
+        day = datetime.datetime.now(timezone('UTC')).astimezone(timezone('Asia/Kolkata')).day
         if os.path.exists('posters/'+str(day)+'.pdf'):
             bot.send_chat_action(chat_id=update["message"]["chat"]["id"], action=telegram.ChatAction.TYPING)
             bot.send_document(chat_id=update.message.chat.id, document=open('posters/'+str(day)+'.pdf',"rb"))
