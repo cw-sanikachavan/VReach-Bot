@@ -16,6 +16,8 @@ logger = logging.getLogger(__name__)
 SET_STAT, BOOK, MENU, VIEW, CAT, DATE, DONE = range(7)
 LST_CHAT_ID = []
 TOKEN = "1047958577:AAFpUNLTsBvr9fi3-DQmZIElPVZcC895Ia0"
+PORT = int(os.environ.get('PORT', 5000))
+
 def start(bot, update):
     try:
         print(datetime.date.today().day)
