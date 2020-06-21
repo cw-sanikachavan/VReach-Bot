@@ -20,13 +20,13 @@ PORT = int(os.environ.get('PORT', 5000))
 
 def start(bot, update):
     try:
-        print(datetime.date.today().day)
-        day = datetime.date.today().day
+        print(datetime.datetime.now().day)
+        day = datetime.datetime.now().day
         if os.path.exists('posters/'+str(day)+'.pdf'):
             bot.send_chat_action(chat_id=update["message"]["chat"]["id"], action=telegram.ChatAction.TYPING)
             bot.send_document(chat_id=update.message.chat.id, document=open('posters/'+str(day)+'.pdf',"rb"))
         else:
-            if int(day) < 22 and int(datetime.date.today().month)==6:
+            if int(day) < 22 and int(datetime.datetime.now().month)==6:
                 dl = 22 - int(day)
                 bot.send_chat_action(chat_id=update["message"]["chat"]["id"], action=telegram.ChatAction.TYPING)
                 update.message.reply_text(str(dl)+" days left for the webinar series to start!")
