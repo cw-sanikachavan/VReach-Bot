@@ -23,6 +23,11 @@ PORT = int(os.environ.get('PORT', 5000))
 
 def start(bot, update):
     try:
+        chat_id=update["message"]["chat"]["id"]
+        if chat_id not in LST_CHAT_ID:
+            LST_CHAT_ID.append(chat_id)
+            print(LST_CHAT_ID)
+            print("Total users till date: "+ str(len(LST_CHAT_ID)))
         print(datetime.datetime.now(timezone('UTC')).astimezone(timezone('Asia/Kolkata')))
         day = datetime.datetime.now(timezone('UTC')).astimezone(timezone('Asia/Kolkata')).day
         print(day)
