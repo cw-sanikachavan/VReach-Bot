@@ -44,6 +44,7 @@ def start(bot, update):
             if day == 22:
                 date_str = str(day) + "nd"
                 new_file = date_str + " June 2020.pdf"
+                print(new_file)
             elif day == 23:    
                 date_str = str(day) + "rd"
                 new_file = date_str + " June 2020.pdf"
