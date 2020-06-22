@@ -39,13 +39,13 @@ def start(bot, update):
                 update.message.reply_text("The Webinar series are over.")
                 return ConversationHandler.END
         reply_keyboard = [['View webinar posters date wise'],['View webinar posters category wise'],['View webinar posters by viewing permissions'],['Thanks']]
-        update.message.reply_text("Select an option",reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
+        update.message.reply_text("Select an option",reply_markup=ReplyKeyboardMarkup(reply_keyboard, resize_keyboard=True))
         return SET_STAT
         
     except Exception as e:
         print(e)
-        update.message.reply_text("Service Timed Out. Please press start to continue.",reply_markup=ReplyKeyboardMarkup(keyboard= ['Start'],resize_keyboard=True))
-
+        update.message.reply_text("Service Timed Out. Please press /start to continue.")
+        
 def menu(bot,update):
     try:
         bot.send_chat_action(chat_id=update["message"]["chat"]["id"], action=telegram.ChatAction.TYPING)
@@ -54,8 +54,8 @@ def menu(bot,update):
         return SET_STAT
     except Exception as e:
         print(e)
-        update.message.reply_text("Service Timed Out. Please press start to continue.",reply_markup=ReplyKeyboardMarkup(keyboard= ['Start'],resize_keyboard=True))
-
+        update.message.reply_text("Service Timed Out. Please press /start to continue.")
+        
 def select_service(bot,update):
     try:
         serviceType = update.message.text
@@ -94,7 +94,7 @@ def date_wise(bot, update):
         update.message.reply_text('I see! Please select a date to proceed',reply_markup=telegramcalendar.create_calendar())
     except Exception as e:
         print(e)
-        update.message.reply_text("Service Timed Out. Please press start to continue.",reply_markup=ReplyKeyboardMarkup(keyboard= ['Start'],resize_keyboard=True))
+        update.message.reply_text("Service Timed Out. Please press /start to continue.")
 
 def select_slot(bot, update):
     try:
@@ -113,7 +113,7 @@ def select_slot(bot, update):
                 return
     except Exception as e:
         print(e)
-        update.message.reply_text("Service Timed Out. Please press start to continue.",reply_markup=ReplyKeyboardMarkup(keyboard= ['Start'],resize_keyboard=True))
+        update.message.reply_text("Service Timed Out. Please press /start to continue.")
 
 def cat_wise(bot,update):
     try:
@@ -131,7 +131,7 @@ def cat_wise(bot,update):
         return SET_STAT 
     except Exception as e:
         print(e)
-        update.message.reply_text("Service Timed Out. Please press start to continue.",reply_markup=ReplyKeyboardMarkup(keyboard= ['Start'],resize_keyboard=True))
+        update.message.reply_text("Service Timed Out. Please press /start to continue.")
 
 def view_wise(bot,update):
     try:
@@ -145,7 +145,7 @@ def view_wise(bot,update):
         return SET_STAT 
     except Exception as e:
         print(e)
-        update.message.reply_text("Service Timed Out. Please press start to continue.",reply_markup=ReplyKeyboardMarkup(keyboard= ['Start'],resize_keyboard=True))
+        update.message.reply_text("Service Timed Out. Please press /start to continue.")
     
 def menu_cat(bot, update):
     try:
@@ -156,7 +156,6 @@ def menu_cat(bot, update):
         update.message.reply_text("Select an option to continue.", reply_markup=reply_markup)
     except Exception as e:
         print(e)
-        update.message.reply_text("Service Timed Out. Please press start to continue.",reply_markup=ReplyKeyboardMarkup(keyboard= ['Start'],resize_keyboard=True))
 
 def menu_view(bot, update):
     try:
@@ -167,12 +166,11 @@ def menu_view(bot, update):
         update.message.reply_text("Select an option to continue.", reply_markup=reply_markup)
     except Exception as e:
         print(e)
-        update.message.reply_text("Service Timed Out. Please press start to continue.",reply_markup=ReplyKeyboardMarkup(keyboard= ['Start'],resize_keyboard=True))
 
 def thanks(bot, update):
     user = update.message.from_user
     logger.info("Bio of %s: %s", user.first_name, update.message.text)
-    update.message.reply_text('Thank you! I hope we can talk again some day.',reply_markup=ReplyKeyboardRemove())
+    update.message.reply_text('Thank you! I hope we can talk again some day. To again have a conversation type Menu or /start.',reply_markup=ReplyKeyboardRemove())
 
     return ConversationHandler.END
 
@@ -180,7 +178,7 @@ def thanks(bot, update):
 def cancel(bot, update):
     user = update.message.from_user
     logger.info("User %s canceled the conversation.", user.first_name)
-    update.message.reply_text('Bye! I hope we can talk again some day.',
+    update.message.reply_text('Bye! I hope we can talk again some day. To again have a conversation type Menu or /start.',
                               reply_markup=ReplyKeyboardRemove())
 
     return ConversationHandler.END
