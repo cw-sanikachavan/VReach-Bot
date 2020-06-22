@@ -44,15 +44,17 @@ def start(bot, update):
         
     except Exception as e:
         print(e)
+        update.message.reply_text("Service Timed Out. Please press start to continue.",reply_markup=ReplyKeyboardMarkup(keyboard= ['Start'],resize_keyboard=True))
 
 def menu(bot,update):
     try:
         bot.send_chat_action(chat_id=update["message"]["chat"]["id"], action=telegram.ChatAction.TYPING)
         reply_keyboard = [['View webinar posters date wise'],['View webinar posters category wise'],['View webinar posters by viewing permissions']]
-        update.message.reply_text("Select an option",reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
+        update.message.reply_text("Select an option",reply_markup=ReplyKeyboardMarkup(reply_keyboard, resize_keyboard=True))
         return SET_STAT
     except Exception as e:
         print(e)
+        update.message.reply_text("Service Timed Out. Please press start to continue.",reply_markup=ReplyKeyboardMarkup(keyboard= ['Start'],resize_keyboard=True))
 
 def select_service(bot,update):
     try:
@@ -92,6 +94,7 @@ def date_wise(bot, update):
         update.message.reply_text('I see! Please select a date to proceed',reply_markup=telegramcalendar.create_calendar())
     except Exception as e:
         print(e)
+        update.message.reply_text("Service Timed Out. Please press start to continue.",reply_markup=ReplyKeyboardMarkup(keyboard= ['Start'],resize_keyboard=True))
 
 def select_slot(bot, update):
     try:
@@ -110,6 +113,7 @@ def select_slot(bot, update):
                 return
     except Exception as e:
         print(e)
+        update.message.reply_text("Service Timed Out. Please press start to continue.",reply_markup=ReplyKeyboardMarkup(keyboard= ['Start'],resize_keyboard=True))
 
 def cat_wise(bot,update):
     try:
@@ -127,7 +131,7 @@ def cat_wise(bot,update):
         return SET_STAT 
     except Exception as e:
         print(e)
-        update.message.reply_text("Service Timed Out. Please press start to continue.")
+        update.message.reply_text("Service Timed Out. Please press start to continue.",reply_markup=ReplyKeyboardMarkup(keyboard= ['Start'],resize_keyboard=True))
 
 def view_wise(bot,update):
     try:
@@ -141,7 +145,7 @@ def view_wise(bot,update):
         return SET_STAT 
     except Exception as e:
         print(e)
-        update.message.reply_text("Service Timed Out. Please press start to continue.")
+        update.message.reply_text("Service Timed Out. Please press start to continue.",reply_markup=ReplyKeyboardMarkup(keyboard= ['Start'],resize_keyboard=True))
     
 def menu_cat(bot, update):
     try:
@@ -152,6 +156,7 @@ def menu_cat(bot, update):
         update.message.reply_text("Select an option to continue.", reply_markup=reply_markup)
     except Exception as e:
         print(e)
+        update.message.reply_text("Service Timed Out. Please press start to continue.",reply_markup=ReplyKeyboardMarkup(keyboard= ['Start'],resize_keyboard=True))
 
 def menu_view(bot, update):
     try:
@@ -162,6 +167,7 @@ def menu_view(bot, update):
         update.message.reply_text("Select an option to continue.", reply_markup=reply_markup)
     except Exception as e:
         print(e)
+        update.message.reply_text("Service Timed Out. Please press start to continue.",reply_markup=ReplyKeyboardMarkup(keyboard= ['Start'],resize_keyboard=True))
 
 def thanks(bot, update):
     user = update.message.from_user
