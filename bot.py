@@ -25,10 +25,34 @@ def start(bot, update):
     try:
         print(datetime.datetime.now(timezone('UTC')).astimezone(timezone('Asia/Kolkata')))
         day = datetime.datetime.now(timezone('UTC')).astimezone(timezone('Asia/Kolkata')).day
-        if os.path.exists('posters/'+str(day)+'.pdf'):
+        print(day)
+        if day == 1:
+            date_str = str(day) + "st"
+            new_file = date_str + " July 2020.pdf"
+        elif day == 2:
+            date_str = str(day) + "nd"
+            new_file = date_str + " July 2020.pdf"
+        elif day == 3:    
+            date_str = str(day) + "rd"
+            new_file = date_str + " July 2020.pdf"
+        else:
+            if day == 22:
+                date_str = str(day) + "nd"
+                new_file = date_str + " June 2020.pdf"
+            elif day == 23:    
+                date_str = str(day) + "rd"
+                new_file = date_str + " June 2020.pdf"
+            else:
+                if day > 23:
+                    date_str = str(day) + "th"
+                    new_file = date_str + " June 2020.pdf"
+                else:
+                    date_str = str(day) + "th"
+                    new_file = date_str + " July 2020.pdf"
+        if os.path.exists('posters/'+new_file):
             bot.send_chat_action(chat_id=update["message"]["chat"]["id"], action=telegram.ChatAction.TYPING)
             update.message.reply_text("Webinar poster scheduled for today.")
-            bot.send_document(chat_id=update.message.chat.id, document=open('posters/'+str(day)+'.pdf',"rb"))
+            bot.send_document(chat_id=update.message.chat.id, document=open('posters/'+new_file,"rb"))
         else:
             if int(day) < 22 and int(datetime.datetime.now().month)==6:
                 dl = 22 - int(day)
@@ -104,7 +128,30 @@ def select_slot(bot, update):
             print(date.day)
             day = date.day
             if (21< int(day) < 31 and int(date.month) == 6) or (int(day)<=12 and int(date.month) == 7):
-                bot.send_document(chat_id=update.callback_query.from_user.id, document=open('posters/'+str(day)+'.pdf',"rb"))
+                if day == 1:
+                    date_str = str(day) + "st"
+                    new_file = date_str + " July 2020.pdf"
+                elif day == 2:
+                    date_str = str(day) + "nd"
+                    new_file = date_str + " July 2020.pdf"
+                elif day == 3:    
+                    date_str = str(day) + "rd"
+                    new_file = date_str + " July 2020.pdf"
+                else:
+                    if day == 22:
+                        date_str = str(day) + "nd"
+                        new_file = date_str + " June 2020.pdf"
+                    elif day == 23:    
+                        date_str = str(day) + "rd"
+                        new_file = date_str + " June 2020.pdf"
+                    else:
+                        if day > 23:
+                            date_str = str(day) + "th"
+                            new_file = date_str + " June 2020.pdf"
+                        else:
+                            date_str = str(day) + "th"
+                            new_file = date_str + " July 2020.pdf"
+                bot.send_document(chat_id=update.callback_query.from_user.id, document=open('posters/'+new_file,"rb"))
                 bot.send_message(chat_id=update.callback_query.from_user.id, text = "Select an option to continue.",reply_markup = ReplyKeyboardMarkup(keyboard= [['Thanks', 'Menu']],resize_keyboard=True))
                 return
             else:
@@ -185,7 +232,7 @@ def cancel(bot, update):
 
 def main():
     # Create the EventHandler and pass it your bot's token.
-    updater = Updater("1047958577:AAFpUNLTsBvr9fi3-DQmZIElPVZcC895Ia0")
+    updater = Updater(TOKEN)
 
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
@@ -212,7 +259,7 @@ def main():
     updater.start_webhook(listen="0.0.0.0",port=int(PORT),url_path=TOKEN)
     updater.bot.setWebhook('https://cryptic-cliffs-47840.herokuapp.com/' + TOKEN)
 
-#    updater.start_polling()
+    #updater.start_polling()
 
     # Run the bot until you press Ctrl-C or the process receives SIGINT,
     # SIGTERM or SIGABRT. This should be used most of the time, since
